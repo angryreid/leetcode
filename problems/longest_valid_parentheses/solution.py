@@ -5,7 +5,7 @@ class Solution:
         start = 0
 
         for i in range(len(s)):
-            if s[i] == '(':
+            if s[i] == "(":
                 stack.append(i)
             else:
                 if not stack:
@@ -17,4 +17,5 @@ class Solution:
                     else:
                         max_len = max(max_len, i - (stack[-1] + 1) + 1)
         return max_len
+
         
