@@ -8,14 +8,14 @@ class Solution:
         dummy = ListNode()
         dummy.next = head
         cur = dummy
-        while cur.next != None and cur.next.next != None:
+        
+        while cur.next and cur.next.next:
             if cur.next.val == cur.next.next.val:
                 val = cur.next.val
                 while cur.next and cur.next.val == val:
                     cur.next = cur.next.next
             else:
                 cur = cur.next
-
+        
         return dummy.next
-
         
