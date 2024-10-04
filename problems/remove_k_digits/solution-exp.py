@@ -9,3 +9,26 @@ class Solution:
             
         # 拼接栈中的数字，并移除多余的k个数字（如果有），去掉前导零，如果结果为空则返回'0'
         return ''.join(stack[:len(stack) - k]).lstrip('0') or '0'
+
+        # Edge case for ''.join(stack[:len(stack) - k]).lstrip('0') is ''
+
+        '''
+        stack = ['1', '2', '3']
+        k = 3
+        # Slicing the stack
+        stack[:len(stack) - k]  # stack[:3 - 3] => stack[:0] => []
+        # Joining the elements
+        ''.join([])  # ''
+        # Stripping leading zeros (no effect here as the string is already empty)
+        ''.join([]).lstrip('0')  # ''
+
+
+        stack = ['0', '0', '0']
+        k = 1
+        # Slicing the stack
+        stack[:len(stack) - k]  # stack[:3 - 1] => stack[:2] => ['0', '0']
+        # Joining the elements
+        ''.join(['0', '0'])  # '00'
+        # Stripping leading zeros
+        '00'.lstrip('0')  # ''
+        '''
