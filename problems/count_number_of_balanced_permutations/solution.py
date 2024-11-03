@@ -7,6 +7,11 @@ class Solution:
         # Calculate the total sum of all digits in the string
         total = sum(int(ch) for ch in num)
 
+        """
+        The @cache decorator in Python is used to cache the results of function calls. This means that if the function is called again with the same arguments, the cached result is returned instead of recomputing the result. This can significantly improve performance for functions that are called frequently with the same arguments.
+
+        In the context of your code, the @cache decorator is used to cache the results of the dfs function, which is a recursive function used to count balanced permutations. By caching the results, the decorator helps avoid redundant calculations and speeds up the execution of the function.
+        """
         @cache
         def dfs(i, odd, even, balanced_sum):
             # Base case: if no odd or even positions left and balanced_sum is zero, return 1
