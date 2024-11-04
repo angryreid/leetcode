@@ -1,4 +1,3 @@
-import heapq
 
 """
 ------------------------------------------------------------
@@ -29,24 +28,30 @@ By using the first element of the tuple as the key, you can control the priority
 In the provided code, the first element of the tuple (ct) represents the current time, which is used to prioritize the elements in the heap.
 """
 
+import heapq
+from typing import List
+
 class Solution:
     def minTimeToReach(self, moveTime: List[List[int]]) -> int:
-        m = len(moveTime)  # Number of rows
-        n = len(moveTime[0])  # Number of columns
-        dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)]  # Possible directions to move
+        if not moveTime or not moveTime[0]:
+            return -1  # Handle empty grid case
+        
+        rows = len(moveTime)  # Number of rows
+        cols = len(moveTime[0])  # Number of columns
+        directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]  # Possible directions to move
         pq = [(0, 0, 0)]  # Priority queue initialized with starting point (time, x, y)
-        visited = [[float('inf')] * n for _ in range(m)]  # Initialize visited matrix with infinity
+        visited = [[float('inf')] * cols for _ in range(rows)]  # Initialize visited matrix with infinity
         visited[0][0] = 0  # Starting point has 0 time
 
         while pq:
-            ct, x, y = heapq.heappop(pq)  # Pop the element with the smallest time
-            if x == m - 1 and y == n - 1:  # If we reached the bottom-right corner
-                return ct  # Return the current time
-            for dx, dy in dirs:  # Explore all possible directions
-                nx, ny = x + dx, y + dy
-                if 0 <= nx < m and 0 <= ny < n:  # Check if the new position is within bounds
-                    nt = max(ct, moveTime[nx][ny]) + 1  # Calculate the new time
-                    if nt < visited[nx][ny]:  # If the new time is less than the visited time
-                        visited[nx][ny] = nt  # Update the visited time
-                        heapq.heappush(pq, (nt, nx, ny))  # Push the new position into the priority queue
+            current_time, x, y = heapq.heappop(pq)  # Pop the element with the smallest time
+            if x == rows - 1 and y == cols - 1:  # If we reached the bottom-right corner
+                return current_time  # Return the current time
+            for dx, dy in directions:  # Explore all possible directions
+                new_x, new_y = x + dx, y + dy
+                if 0 <= new_x < rows and 0 <= new_y < cols:  # Check if the new position is within bounds
+                    new_time = max(current_time, moveTime[new_x][new_y]) + 1  # Calculate the new time
+                    if new_time < visited[new_x][new_y]:  # If the new time is less than the visited time
+                        visited[new_x][new_y] = new_time  # Update the visited time
+                        heapq.heappush(pq, (new_time, new_x, new_y))  # Push the new position into the priority queue
         return -1  # If we cannot reach the bottom-right corner, return -1
