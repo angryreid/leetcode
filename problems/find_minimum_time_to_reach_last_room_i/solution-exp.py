@@ -1,4 +1,3 @@
-
 """
 ------------------------------------------------------------
 In Python, the heapq module provides an implementation of the heap queue algorithm, also known as the priority queue algorithm. By default, heapq creates a min-heap, which means that the smallest element is always at the root of the heap.
