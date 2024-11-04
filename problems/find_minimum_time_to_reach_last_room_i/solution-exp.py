@@ -1,6 +1,7 @@
 import heapq
 
 """
+------------------------------------------------------------
 In Python, the heapq module provides an implementation of the heap queue algorithm, also known as the priority queue algorithm. By default, heapq creates a min-heap, which means that the smallest element is always at the root of the heap.
 
 How heapq Works:
@@ -9,7 +10,23 @@ Ordering: When you push elements into the heap using heapq.heappush, the element
 Example:
 In the provided code, the priority queue pq is used to store tuples of the form (ct, x, y), where ct is the current time, and (x, y) are the coordinates. The heap is ordered by ct, so the element with the smallest ct is always popped first.
 
+In Python's heapq module, the first element of the tuple is used as the sorting key because heapq is designed to work with the natural ordering of the elements. When you push a tuple into the heap, heapq uses the first element of the tuple to determine the order of the elements in the heap.
 
+------------------------------------------------------------
+Detailed Explanation:
+
+Min-Heap Property:
+
+heapq maintains the heap property, which ensures that the smallest element is always at the root of the heap.
+When tuples are pushed into the heap, heapq compares the first elements of the tuples to maintain this property.
+Tuple Comparison:
+
+In Python, tuples are compared lexicographically. This means that the first elements are compared first, and if they are equal, the second elements are compared, and so on.
+For example, (1, 2, 3) is considered smaller than (2, 1, 3) because 1 is smaller than 2.
+Using the First Element as the Key:
+
+By using the first element of the tuple as the key, you can control the priority of the elements in the heap.
+In the provided code, the first element of the tuple (ct) represents the current time, which is used to prioritize the elements in the heap.
 """
 
 class Solution:
