@@ -13,7 +13,7 @@ def solution(n, k, data):
         for j in range(i - 1, max(i - k, -1), -1):
             dp[i] = min(dp[i], dp[i - 1] + data[j])
 
-    return dp[length - 1]
+    return dp[- 1]
 
 # Test cases
 if __name__ == "__main__":
