@@ -1,20 +1,42 @@
+# Name of the workflow
 name: Sync Leetcode
 
+# Trigger conditions for the workflow
 on:
+  # Allows manual triggering of the workflow from the GitHub UI
   workflow_dispatch:
+  
+  # Schedule the workflow to run automatically at a specific time
   schedule:
+    # Cron syntax to run the workflow at 8:00 AM every Saturday
     - cron: '0 8 * * 6'
 
+# Define the jobs to be executed in the workflow
 jobs:
+  # Name of the job (can be anything, here it's named "build")
   build:
+    # Specifies the type of machine to run the job on (latest Ubuntu version)
     runs-on: ubuntu-latest
 
+    # List of steps to execute in the job
     steps:
+      # Step 1: Sync LeetCode data
       - name: Sync
+        # Uses a pre-built GitHub Action for syncing LeetCode data
         uses: joshcai/leetcode-sync@v1.5
+        # Input parameters for the action
         with:
+          # GitHub token for authentication (automatically provided by GitHub)
           github-token: ${{ github.token }}
+          
+          # LeetCode CSRF token (stored as a secret in the repository)
           leetcode-csrf-token: ${{ secrets.LEETCODE_CSRF_TOKEN }}
+          
+          # LeetCode session token (stored as a secret in the repository)
           leetcode-session: ${{ secrets.LEETCODE_SESSION }}
+          
+          # Enable verbose logging for debugging purposes
           verbose: true
+          
+          # Custom commit message header for synced changes
           commit-header: '[LeetCode Sync]'
