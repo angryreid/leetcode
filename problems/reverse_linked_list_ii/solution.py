@@ -14,7 +14,6 @@ class Solution:
         for _ in range(left - 1):
             pre = pre.next
             cur = cur.next
-        
         for _ in range(right - left):
             temp = cur.next
             cur.next = cur.next.next
