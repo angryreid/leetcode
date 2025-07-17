@@ -9,6 +9,7 @@ class Solution:
                 return
             if remaining == 0:
                 all_list.append(cur_list.copy())
+                return
 
             for i in range(level, len(candidates)):
                 if i > level and candidates[i] == candidates[i - 1]:
