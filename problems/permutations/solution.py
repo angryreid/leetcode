@@ -1,21 +1,19 @@
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
-        sets = []
-        subsets = []
-        used = [False] * len(nums)
-        self.backtrack(nums, sets, subsets, used)
-        return sets
-    
-    def backtrack(self, nums, sets, subsets, used):
-        if len(subsets) == len(nums):
-            sets.append(subsets[:])
-            return
-        
-        for i in range(len(nums)):
-            if not used[i]:
-                subsets.append(nums[i])
-                used[i] = True
-
-                self.backtrack(nums, sets, subsets, used)
-                used[i] = False
-                subsets.pop()
+        n = len(nums)
+        res = []
+        cur = []
+        used = [False] * n
+        def backtrack(level):
+            if level == n:
+                res.append(cur.copy())
+                return
+            for i in range(n):
+                if not used[i]:
+                    used[i] = True
+                    cur.append(nums[i])
+                    backtrack(level + 1)
+                    used[i] = False
+                    cur.pop()
+        backtrack(0)
+        return res
