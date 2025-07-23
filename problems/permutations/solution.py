@@ -1,19 +1,22 @@
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
-        n = len(nums)
         res = []
         cur = []
+        n = len(nums)
         used = [False] * n
-        def backtrack(level):
-            if level == n:
+        
+        def backtrack():
+            if len(cur) == n:
                 res.append(cur.copy())
                 return
-            for i in range(n):
+            
+            for i in range(n):  # Always check all indices
                 if not used[i]:
                     used[i] = True
                     cur.append(nums[i])
-                    backtrack(level + 1)
-                    used[i] = False
+                    backtrack()  # No level parameter needed
                     cur.pop()
-        backtrack(0)
+                    used[i] = False
+                    
+        backtrack()
         return res
