@@ -21,10 +21,11 @@ jobs:
     # List of steps to execute in the job
     steps:
       # Step 1: Sync LeetCode data
+      - name: Check GitHub Token
+        run: echo "Token exists? ${{ github.token }}"
+      
       - name: Sync
-        # Uses a pre-built GitHub Action for syncing LeetCode data
         uses: joshcai/leetcode-sync@v1.5
-        # Input parameters for the action
         with:
           # GitHub token for authentication (automatically provided by GitHub)
           github-token: ${{ secrets.GITHUB_TOKEN }}
